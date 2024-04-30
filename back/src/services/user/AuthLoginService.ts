@@ -22,6 +22,8 @@ class AuthUserService{
         if(!passwordMatch){
             throw new Error("User/password incorrect")
         }
+
+        // gerar token JWT
     }
 }
 
