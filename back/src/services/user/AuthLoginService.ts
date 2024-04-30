@@ -1,7 +1,11 @@
 import prismaClient from "../../prisma";
 
+interface AuthResquest{
+    email: string,
+    password: string
+}
 class AuthUserService{
-    async execute(){
+    async execute({email, password}: AuthResquest){
         
     }
 }
