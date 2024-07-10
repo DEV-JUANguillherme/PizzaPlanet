@@ -25,10 +25,12 @@ class AuthUserService{
         }
 
         // gerar token JWT, se der tudo certo
-        const token = sign({
+        const token = sign(
+            {
             name: user.name,
             email: user.email,
-        })
+        },
+    )
 
     }
 }
