@@ -4,6 +4,7 @@ import { AuthUserService } from "../../services/user/AuthLoginService";
 class AuthLoginController{
     async handle(req: Request, res: Response){
         const {email, password} = req.body
+    
 
         const authLoginService = new AuthUserService()
 
