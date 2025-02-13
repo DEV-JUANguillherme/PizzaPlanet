@@ -1,18 +1,16 @@
 version: '3.8'
-
 services:
   postgres:
-    image: postgres:15
-    container_name: pizzaPlanet
-    restart: always
+    image: bitnami/postgresql:latest
+    container_name: meu_postgres
     environment:
-      POSTGRES_USER: meu_usuario
-      POSTGRES_PASSWORD: minha_senha
-      POSTGRES_DB: meu_banco
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_PASSWORD=1234
+      - POSTGRESQL_DATABASE=pizzaplanet
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-
+      - postgres_data:/bitnami/postgresql
 volumes:
   postgres_data:
+    driver: local
