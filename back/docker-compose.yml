@@ -1,16 +1,45 @@
-version: '3.8'
-services:
-  postgres:
-    image: bitnami/postgresql:latest
-    container_name: meu_postgres
+version: "3"
+
+services: 
+  app:
+    image: DEV-JUANguillherme/PizzaPlanet.amd-64
+    build: .
+    container_name: PizzaPlanet
+    restart: always
+    tty: true
+    networks: 
+      - API-inspiratio-codeinnove_bridge
+    ports: 
+      - 9000:3000
+      - 9229:9229
+    volumes: 
+      - .:/usr/src/app
+      # - /usr/src/app/node_modules
+    command: yarn start:dev
     environment:
-      - POSTGRESQL_USERNAME=admin
-      - POSTGRESQL_PASSWORD=1234
-      - POSTGRESQL_DATABASE=pizzaplanet
-    ports:
-      - "5432:5432"
+      NODE_ENV: development
+    depends_on: 
+      - db
+
+  db: 
+    image: postgres:latest
+    restart: always
+    container_name: PizzaPlanet_postgres_db
+    networks:
+      - API-inspiratio-codeinnove_bridge
     volumes:
-      - postgres_data:/bitnami/postgresql
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: pizza_planet_db
+  networks:
+  API-inspiratio-codeinnove_bridge:
+    driver: bridge
+
 volumes:
-  postgres_data:
-    driver: local
+  postgres_data: # Volume nomeado para armazenar os dados do banco
+
+
