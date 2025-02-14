@@ -23,6 +23,11 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     message: 'Internal server error.'
   })
 
+  
+
 })
 
-app.listen(3333, () => console.log('Servidor online!!!!'))
+// Use a porta definida na variável de ambiente ou 3333 como padrão
+const PORT = process.env.PORT || 3333;
+
+app.listen(PORT, () => console.log(`Servidor online na porta ${PORT}!!!!`));

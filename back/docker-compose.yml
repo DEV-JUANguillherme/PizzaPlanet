@@ -1,27 +1,27 @@
-version: "3"
+version: "3.8"
 
-services: 
+services:
   app:
     build: .
     container_name: PizzaPlanet
     restart: always
     tty: true
-    ports: 
-      - "9000:3000"
-      - "9229:9229"
-    volumes: 
+    ports:
+      - "3001:3000"
+    volumes:
       - .:/usr/src/app
-    command: yarn start:dev
+    command: yarn dev 
+    # Ou `yarn start` se estiver em produção
     environment:
-      NODE_ENV: development
-    depends_on: 
+      NODE_ENV: development  # Ou production
+      DATABASE_URL: postgres://root:root@db:5432/pizza_planet_db  # URL de conexão com o banco de dados
+    depends_on:
       - db
     networks:
       - pizza_network
 
-  db: 
+  db:
     image: postgres:latest
-    restart: always
     container_name: PizzaPlanet_postgres_db
     ports:
       - "5432:5432"
